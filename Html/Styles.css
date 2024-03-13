@@ -104,7 +104,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("assets/bg_image_login.jpg");
+    background-image: url("../assets/bg_image_login.jpg");
     background-size: cover;
 }
 #login form{
@@ -116,8 +116,36 @@
     width: 300px;
     margin: 200px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 10px;
+}
+#register {
+    background-image: url("../assets/bg_image_register.jpg");
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#register form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height:400px;
+    width: 500px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    margin: 200px;
+}
+#register td{
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:200px;
+    font-style: normal;
+    font-size: 20px;
+
 }
