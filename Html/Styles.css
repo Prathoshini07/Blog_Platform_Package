@@ -92,6 +92,55 @@
     60% { top: -150px; }
     80% { top: -200px; }
     }
+    .sliding-images {
+        position: absolute;
+        transform: rotate(45deg);
+    }
+    #img1 {
+        top: -200;
+        right: -280;
+        width: 700px;
+    }
+    #img2 {
+        top: -300;
+        right: 550;
+        width: 500px;
+    }
+    #img3 {
+        top: -12;
+        right: 460;
+        width: 150px;
+    }
+    #img4 {
+        top: 230;
+        right: 70;
+        width: 450px;
+    }
+    #img5 {
+        bottom: -100;
+        right: -30;
+        width: 150px;
+    }
+    #img6 {
+        bottom: -280;
+        right: 160;
+        width: 600px;
+    }
+    @keyframes move {
+        0% { top: 0px; }
+        20% { top: -50px; }
+        40% { top: -100px; }
+        60% { top: -150px; }
+        80% { top: -200px; }
+    }
+
+    @keyframes slide {
+        0% { transform: translate(-50px, -50px); }
+        25% { transform: translate(0, 0); }
+        50% { transform: translate(50px, 50px); }
+        75% { transform: translate(100px, 100px); }
+        100% { transform: translate(150px, 150px); }
+    }
 #login tr,td{
     text-align: center;
     font-family: "Quicksand", sans-serif;
@@ -135,11 +184,17 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height:400px;
-    width: 500px;
+    width:400px;
+    height:650px;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 10px;
-    margin: 200px;
+    margin: 100px;
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:200px;
+    font-style: normal;
+    font-size: 20px;
+
 }
 #register td{
     font-family: "Quicksand", sans-serif;
@@ -147,5 +202,8 @@
     font-weight:200px;
     font-style: normal;
     font-size: 20px;
-
+}
+#register .msg {
+    display: none;
+    font-size: 0.7rem;
 }

@@ -7,45 +7,187 @@
         <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     </head>
     <body>
+        <script>
+            let validate = (event) => 
+            {
+                event.preventDefault();
+                var username=document.getElementById("username").value;
+                var email=document.getElementById("email").value;
+                var password=document.getElementById("password").value;
+                var password2=document.getElementById("password2").value;
+                var name=document.getElementById("name").value;
+                var bio=document.getElementById("bio").value;
+                var date=document.getElementById("date").value;
+                var gender=document.getElementById("gender").value;
+                console.log(username,email,password,password2,name,date,gender);
+                let username_re=/^\w{8,16}$/;
+                let email_re=/^\w+([\.-]?\w)*@\w+([\.-]?\w)*(\.\w{2,3})*$/;
+                let password_re=/^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&*]).{8,20}$/;
+                let name_re=/^[a-zA-Z\s]{3,30}$/;
+                document
+                    .querySelectorAll("span.msg")
+                    .forEach((x)=>(x.style.display="block"));
+                
+                if(!username_re.test(username))
+                {
+                    document.querySelector("#username+span.msg").style.color="red";
+                    document.getElementById("username").style.boxShadow="0 0 7px red";
+                    document.querySelector("#username+span.msg").innerHTML="Invalid Username.The username must be atleast 8 characaters long";
+                }
+                else
+                {
+                    document.querySelector("#username+span.msg").style.color="green";
+                    document.getElementById("username").style.boxShadow="0 0 7px green";
+                    document.querySelector("#username+span.msg").innerHTML="Valid Username.";
+                }
+                if(!email_re.test(email))
+                {
+                    document.querySelector("#email+span.msg").style.color="red";
+                    document.getElementById("email").style.boxShadow="0 0 7px red";
+                    document.querySelector("#email+span.msg").innerHTML="Invalid Email.";
+                }
+                else
+                {
+                    document.querySelector("#email+span.msg").style.color="green";
+                    document.getElementById("email").style.boxShadow="0 0 7px green";
+                    document.querySelector("#email+span.msg").innerHTML="Valid email.";
+                }
+                if(!password_re.test(password))
+                {
+                    document.querySelector("#password+span.msg").style.color="red";
+                    document.getElementById("password").style.boxShadow="0 0 7px red";
+                    document.querySelector("#password+span.msg").innerHTML="Invalid Password.The password must be atleast 8 characaters long with atleast one small letter,one capital letter and atleast on special character.";
+                }
+                else
+                {
+                    document.querySelector("#password+span.msg").style.color="green";
+                    document.getElementById("password").style.boxShadow="0 0 7px green";
+                    document.querySelector("#password+span.msg").innerHTML="Valid password.";
+                }
+                if(password2!=password || password2=="")
+                {
+                    document.querySelector("#password2+span.msg").style.color="red";
+                    document.getElementById("password2").style.boxShadow="0 0 7px red";
+                    document.querySelector("#password2+span.msg").innerHTML="Password does not match";
+                }
+                else
+                {
+                    document.querySelector("#password2+span.msg").style.color="green";
+                    document.getElementById("password2").style.boxShadow="0 0 7px green";
+                    document.querySelector("#password2+span.msg").innerHTML="Password matches.";
+                }
+                if(!name_re.test(name))
+                {
+                    document.querySelector("#name+span.msg").style.color="red";
+                    document.getElementById("name").style.boxShadow="0 0 7px red";
+                    document.querySelector("#name+span.msg").innerHTML="Invalid Name.There should be no special characters or digits";
+                }
+                else
+                {
+                    document.querySelector("#name+span.msg").style.color="green";
+                    document.getElementById("name").style.boxShadow="0 0 7px green";
+                    document.querySelector("#name+span.msg").innerHTML="Valid Name.";
+                }
+                if(date!="")
+                {
+                    var dateobj = new Date(date);
+                    var year = dateobj.getFullYear();
+                    var month = dateobj.getMonth() + 1; 
+                    var day = dateobj.getDate();
+                    var today = new Date();
+                    age=today.getFullYear()-year;
+                    var m = today.getMonth() - month;
+                    if (m < 0 || (m === 0 && today.getDate() < day)) 
+                    {
+                        age--;
+                    }
+                    if(age<13)
+                    {
+                        document.querySelector("#date+span.msg").style.color="red";
+                        document.getElementById("date").style.boxShadow="0 0 7px red";
+                        document.querySelector("#date+span.msg").innerHTML="Atleast 13 years of age is required";
+                    }
+                    else
+                    {
+                        document.querySelector("#date+span.msg").style.color="green";
+                        document.getElementById("date").style.boxShadow="0 0 7px green";
+                        document.querySelector("#date+span.msg").innerHTML="Valid Date.";
+                    }
+                }
+                else
+                {
+                    document.querySelector("#date+span.msg").style.color="red";
+                    document.getElementById("date").style.boxShadow="0 0 7px red";
+                    document.querySelector("#date+span.msg").innerHTML="This field cannot be left blank";   
+                }
+                if(bio!="")
+                {
+                    document.querySelector("#bio+span.msg").style.color="green";
+                    document.getElementById("bio").style.boxShadow="0 0 7px green";
+                    document.querySelector("#bio+span.msg").innerHTML="Valid Bio";
+                }
+                else
+                {
+                    document.querySelector("#bio+span.msg").style.color="red";
+                    document.getElementById("bio").style.boxShadow="0 0 7px red";
+                    document.querySelector("#bio+span.msg").innerHTML="This field cannot be left blank";
+                }
+                if(gender=="")
+                {
+                    document.querySelector("#gender+span.msg").style.color="red";
+                    document.getElementById("gender").style.boxShadow="0 0 7px red";
+                    document.querySelector("#gender+span.msg").innerHTML="This field cannot be left blank";
+                }
+                else{
+                    document.querySelector("#gender+span.msg").style.color="green";
+                    document.getElementById("gender").style.boxShadow="0 0 7px green";
+                    document.querySelector("#gender+span.msg").innerHTML="Valid Gender is entered";
+                }
+
+            }
+        </script>
         <div id="register">
-        <form>
+        <form action="" >
             <h3>Registration Form</h3>
-            <table>
-                <tr>
-                    <td style="text-align: right;">UserName</td>
-                    <td><input type="text" placeholder="UserName"></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Email</td>
-                    <td><input type="email" placeholder="Email"></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Password</td>
-                    <td><input type="password" placeholder="Password"></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Name</td>
-                    <td><input type="text" placeholder="Name"></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Bio</td>
-                    <td><textarea rows="4" cols="30"></textarea></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Date Of Birth</td>
-                    <td><input type="date" ></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Gender</td>
-                    <td><select placeholder="select an option">
-                        <option value=""></option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                        <option value="nm">Prefer not to tell</option>
-                    </select></td>
-                </tr>
-            </table>
+                    <label for="username">UserName</label>
+                    <input type="text" placeholder="UserName" name="username" id="username" required>
+                    <span class="msg"></span>
+
+                    <label for="email">Email</label>
+                    <input type="email" placeholder="Email" name="email" id="email" required>
+                    <span class="msg"></span>
+                    
+                    <label for="password">Password</label>
+                    <input type="password" placeholder="Password" name="password" id="password" required>
+                    <span class="msg"></span>
+                    
+                    <label for="password2">Confirm Password</label>
+                    <input type="password" placeholder="Confirm Password" name="password2" id="password2" required>
+                    <span class="msg"></span>
+                    
+                    <label for="name">Name</label>
+                    <input type="text" placeholder="Name" name="name" id="name" required>
+                    <span class="msg"></span>
+                    
+                    <label for="Bio">Bio</label>
+                    <textarea rows="4" cols="30" required name="bio" id="bio"></textarea>
+                    <span class="msg"></span>
+                    
+                    <label for="date">Date of Birth</label>
+                    <input type="date" name="date" id="date" min="1930-01-01" required>
+                    <span class="msg"></span>
+                    
+                    <label for="gender">Gender</label>
+                    <select placeholder="select an option" name="gender" id="gender" required>
+                        <option value="" id="gender" required></option>
+                        <option value="Male" id="gender" required>Male</option>
+                        <option value="Female" id="gender" required>Female</option>
+                        <option value="Other" id="gender" required>Other</option>
+                        <option value="nm" id="gender" required>Prefer not to tell</option>
+                    </select>
+                    <span class="msg"></span>
+            <br>
+            <button onclick="validate(event)">Register</button>
         </form>
         </div>
     </body>
