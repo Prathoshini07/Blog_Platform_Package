@@ -207,3 +207,86 @@
     display: none;
     font-size: 0.7rem;
 }
+#theme {
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:200px;
+    font-style: normal;
+    font-size: 15px;
+}
+.theme-column {
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px;
+}
+.theme-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    width: 200px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.theme-card label {
+    font-weight: bold;
+}
+.theme-card input[type="checkbox"] {
+    margin-top: 10px;
+}
+#submit-button {
+    display: block;
+    margin: 20px auto; 
+    padding: 10px 20px; 
+    background-color: #007bff; 
+    color: white;
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    transition: background-color 0.3s ease; 
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:200px;
+    font-style: normal;
+    font-size: 15px;
+}
+
+#submit-button:hover {
+    background-color: #0056b3; 
+}
+#editor-container {
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+  .ql-toolbar {
+    border-bottom: 1px solid #ccc;
+  }
+  .ql-container {
+    min-height: 500px; 
+  }
+  .ql-editor {
+    font-size: 16px;
+    color: #333;
+    
+  }
+  .ql-editor p {
+    margin: 0;
+    padding: 0;
+    
+  }
+  .ql-editor img {
+    max-width: 100%;
+    height: auto;
+  }
