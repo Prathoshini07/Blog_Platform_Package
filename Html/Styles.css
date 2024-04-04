@@ -149,12 +149,17 @@
     font-style: normal;
     font-size: 20px;
 }
+#logo{
+    font-family:Great Vibes, cursive;
+    font-weight: 600;
+}
 #login{
     display: flex;
     justify-content: center;
     align-items: center;
     background-image: url("../assets/bg_image_login.jpg");
     background-size: cover;
+    height:100vh;
 }
 #login form{
     font-family: "Quicksand", sans-serif;
