@@ -7,20 +7,20 @@
     </head>
     <body>
         <div id="login">
-        <form>
+        <form method="post" action="../php/login_user.php">
             <h3>Sign In</h3>
             <table >
                 <tr>
                     <td>Email</td>
                 </tr>
                 <tr>
-                    <td><input type="text" placeholder="Email"</td>
+                    <td><input type="text" name="email" id="email" placeholder="Email"></td>
                 </tr>
                 <tr>
                     <td>Password</td>
                 </tr>
                 <tr>
-                    <td><input type="password" placeholder="password"></td>
+                    <td><input type="password" name="password" id="password" placeholder="password"></td>
                 </tr>
                 <tr>
                     <td><a href="Registration.html">Register</a>if you are a new user</td>

@@ -7,7 +7,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     </head>
     <body>
-        <script>
+        <!--<script>
             let flag1=0;
             let flag2=0;
             let flag3=0;
@@ -16,15 +16,17 @@
             let flag6=0;
             let flag7=0;
             let flag8=0;
-            let validate = () => {
-            var username = document.getElementById("username").value;
-            var email = document.getElementById("email").value;
-            var password = document.getElementById("password").value;
-            var password2 = document.getElementById("password2").value;
-            var name = document.getElementById("name").value;
-            var bio = document.getElementById("bio").value;
-            var date = document.getElementById("date").value;
-            var gender = document.getElementById("gender").value;
+            let validate = (event) => 
+            {
+                event.preventDefault();
+                var username=document.getElementById("username").value;
+                var email=document.getElementById("email").value;
+                var password=document.getElementById("password").value;
+                var password2=document.getElementById("password2").value;
+                var name=document.getElementById("name").value;
+                var bio=document.getElementById("bio").value;
+                var date=document.getElementById("date").value;
+                var gender=document.getElementById("gender").value;
                 console.log(username,email,password,password2,name,date,gender);
                 let username_re=/^\w{8,16}$/;
                 let email_re=/^\w+([\.-]?\w)*@\w+([\.-]?\w)*(\.\w{2,3})*$/;
@@ -165,19 +167,13 @@
                     document.getElementById("gender").style.boxShadow="0 0 7px green";
                     //document.querySelector("#gender+span.msg").innerHTML="Valid Gender is entered";
                     flag8=0;
-                } 
+                }
 
-              if (flag1==0 && flag2==0 && flag3==0 && flag4==0 && flag5==0 && flag6==0 && flag7==0 && flag8==0) {
-                  window.location.href = "theme_choice.html"; 
-           // if (flag1 == 0 && flag2 == 0 && flag3 == 0 && flag4 == 0 && flag5 == 0 && flag6 == 0 && flag7 == 0 && flag8 == 0) {
-                //document.getElementById("registration_form").submit(); // Submit the form
-                //window.location.href = "theme_choice.html";
-            //} else {
-                // If any validation fails, do not submit the form
-               // return false;
-            //}
+            if (flag1==0 && flag2==0 && flag3==0 && flag4==0 && flag5==0 && flag6==0 && flag7==0 && flag8==0) {
+                window.location.href = "theme_choice.html"; 
+            }
         }
-        </script>
+        </script>-->
         <div id="register">
         <form action="../php/user_reg.php" method="post" >
             <h3>Registration Form</h3>
@@ -206,7 +202,7 @@
                     <span class="msg"></span>
                     
                     <label for="date">Date of Birth</label>
-                    <input type="date" name="date" id="date" min="1930-01-01" required>
+                    <input type="date" name="dob" id="dob" min="1930-01-01" required>
                     <span class="msg"></span>
                     
                     <label for="gender">Gender</label>
@@ -219,7 +215,7 @@
                     </select>
                     <span class="msg"></span>
             <br>
-            <button onclick="validate(event)">Register</button>
+            <button >Register</button>
         </form>
         </div>
     </body>
