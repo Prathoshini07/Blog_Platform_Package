@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reading Blog</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
   <style>
     .hero {
       background-image: url('https://source.unsplash.com/1600x900/?books,reading');
@@ -39,11 +41,12 @@
     .marquee {
       white-space: nowrap;
       overflow: hidden;
+      overflow-y: auto;
       width: 100%;
       box-sizing: border-box;
       animation: marquee 10s linear infinite;
       scroll-behavior: smooth;
-      scroll-snap-type: smooth;
+      scroll-snap-type:smooth;
       animation-delay: 0s;
     }
 
@@ -58,6 +61,10 @@
       100% {
         transform: translateX(-100%);
       }
+    }
+    .blog-post-content {
+      max-height: 200px; /* Adjust the max height as needed */
+      overflow-y: auto; /* Enable vertical scrolling if needed */
     }
   </style>
 </head>
@@ -82,9 +89,7 @@
   <div class="marquee">
     <div class="container my-5">
       <h2 class="mb-4 text-center">Latest Blog Posts</h2>
-      <div class="owl-carousel owl-theme owl-carousel-continuous">
-        <!-- Blog posts will be dynamically loaded here from the backend -->
-        <!-- PHP code to include read_blog.php -->
+      <div class="row">
         <?php
           // Database connection parameters
           $servername = "localhost";
@@ -103,17 +108,18 @@
           // Query to fetch all blogs from the database
           $sql = "SELECT * FROM blogs";
           $result = $conn->query($sql);
-
+          $image_url='https://source.unsplash.com/1600x900/?books,reading';
           if ($result->num_rows > 0) {
               // Output data of each row
               while($row = $result->fetch_assoc()) {
+                  echo '<div class="col-md-4 mb-4">';
                   echo '<div class="blog-post">';
-                  echo '<img src="' . $row["image_url"] . '" alt="Blog Post Image">';
+                  echo '<img src="https://source.unsplash.com/1600x900/?books,reading" alt="Blog Post Image">';
                   echo '<div class="blog-post-content">';
                   echo '<h3 class="mt-1">' . $row["title"] . '</h3>';
                   echo '<p>' . $row["content"] . '</p>';
-                  echo '<a href="#" class="btn btn-primary">Read More</a>';
-                  echo '</div></div>';
+                  echo '<a href="read_blog1.php?title=' . urlencode($row["title"]) . '&content=' . urlencode($row["content"]) . '" class="btn btn-primary">Read More</a>';
+                  echo '</div></div></div>';
               }
           } else {
               echo "No blogs found";
@@ -123,13 +129,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Footer -->
-  <footer class="bg-dark text-white py-3">
-    <div class="container">
-      <p>&copy; 2023 Reading Blog. All rights reserved.</p>
-    </div>
-  </footer>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
