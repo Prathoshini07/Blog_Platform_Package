@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reading Blog</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
   <style>
     .hero {
-      background-image: url('https://source.unsplash.com/1600x900/?books,reading');
+      background-image: url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
       background-size: cover;
       background-position: center;
       height: 500px;
@@ -26,6 +24,9 @@
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease;
+      flex: 0 0 auto;
+      width: 300px; /* Set a fixed width for each blog post */
+      margin-right: 20px; /* Add some spacing between blog posts */
     }
 
     .blog-post:hover {
@@ -38,33 +39,10 @@
       border-radius: 10px;
     }
 
-    .marquee {
-      white-space: nowrap;
-      overflow: hidden;
-      overflow-y: auto;
-      width: 100%;
-      box-sizing: border-box;
-      animation: marquee 10s linear infinite;
-      scroll-behavior: smooth;
-      scroll-snap-type:smooth;
-      animation-delay: 0s;
-    }
-
-    .marquee:hover {
-      animation-play-state: paused;
-    }
-
-    @keyframes marquee {
-      0% {
-        transform: translateX(100%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
-    }
-    .blog-post-content {
-      max-height: 200px; /* Adjust the max height as needed */
-      overflow-y: auto; /* Enable vertical scrolling if needed */
+    .blog-container {
+      display: flex;
+      overflow-x: auto; /* Enable horizontal scrolling */
+      padding-bottom: 20px; /* Add some space at the bottom for clarity */
     }
   </style>
 </head>
@@ -86,75 +64,59 @@
   </div>
 
   <!-- Blog Posts -->
-  <div class="marquee">
-    <div class="container my-5">
-      <h2 class="mb-4 text-center">Latest Blog Posts</h2>
-      <div class="row">
-        <?php
-          // Database connection parameters
-          $servername = "localhost";
-          $username = "root";
-          $password = "";
-          $dbname = "quillverse";
+  <div class="container my-5">
+    <h2 class="mb-4 text-center">Latest Blog Posts</h2>
+    <div class="blog-container">
+    <?php
+// Database connection parameters
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "quillverse";
 
-          // Create connection
-          $conn = new mysqli($servername, $username, $password, $dbname);
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-          // Check connection
-          if ($conn->connect_error) {
-              die("Connection failed: " . $conn->connect_error);
-          }
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-          // Query to fetch all blogs from the database
-          $sql = "SELECT * FROM blogs";
-          $result = $conn->query($sql);
-          $image_url='https://source.unsplash.com/1600x900/?books,reading';
-          if ($result->num_rows > 0) {
-              // Output data of each row
-              while($row = $result->fetch_assoc()) {
-                  echo '<div class="col-md-4 mb-4">';
-                  echo '<div class="blog-post">';
-                  echo '<img src="https://source.unsplash.com/1600x900/?books,reading" alt="Blog Post Image">';
-                  echo '<div class="blog-post-content">';
-                  echo '<h3 class="mt-1">' . $row["title"] . '</h3>';
-                  echo '<p>' . $row["content"] . '</p>';
-                  echo '<a href="read_blog1.php?title=' . urlencode($row["title"]) . '&content=' . urlencode($row["content"]) . '" class="btn btn-primary">Read More</a>';
-                  echo '</div></div></div>';
-              }
-          } else {
-              echo "No blogs found";
-          }
-          $conn->close();
-        ?>
-      </div>
+// Query to fetch all blogs from the database
+$sql = "SELECT * FROM blogs order by blog_id DESC";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Output data of each row
+    while ($row = $result->fetch_assoc()) {
+        // Generate an image URL based on the blog title
+        $title = $row["title"];
+        $image_url = 'https://source.unsplash.com/1600x900/?' . str_replace(' ', ',', $title) . ',books,reading,' . rand(1, 1000);
+        echo '<div class="blog-post mr-4">';
+        echo '<img src="' . $image_url . '" alt="Blog Post Image">';
+        echo '<div class="blog-post-content">';
+        echo '<h3 class="mt-1">' . $row["title"] . '</h3>';
+        
+        // Display only beginning few words with overflow hidden
+        $content = $row["content"];
+        $word_limit = 50; // Adjust the number of words to display
+        $content_words = explode(' ', $content);
+        $short_content = implode(' ', array_slice($content_words, 0, $word_limit));
+        echo '<p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">' . $short_content . '</p>';
+        
+        echo '<a href="read_blog1.php?title=' . urlencode($row["title"]) . '&content=' . urlencode($row["content"]) . '" class="btn btn-primary">Read More</a>';
+        echo '</div></div>';
+    }
+} else {
+    echo "No blogs found";
+}
+$conn->close();
+?>
     </div>
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      $('.owl-carousel-continuous').owlCarousel({
-        loop: true,
-        margin: 30,
-        nav: false,
-        dots: false,
-        autoplay: false,
-        responsive: {
-          0: {
-            items: 1
-          },
-          768: {
-            items: 2
-          },
-          992: {
-            items: 3
-          }
-        }
-      });
-    });
-  </script>
 </body>
 </html>
